@@ -7,7 +7,7 @@ export const addData = () => {
   return async (dispatch, getState) => {
     // Fetching results from an API : asynchronous action
     const response = await axios.get(
-      "https://jsonplaceholder.typicode.com/todos/1"
+      "https://6458b9628badff578ef8e5d7.mockapi.io/api/users"
     );
     dispatch({
       type: "ADD_DATA",
@@ -17,9 +17,9 @@ export const addData = () => {
 };
 
 export const getData = () => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     const response = await axios.get(
-      "https://jsonplaceholder.typicode.com/todos"
+      "https://6458b9628badff578ef8e5d7.mockapi.io/api/users"
     );
     dispatch({
       type: "GET_DATA",
@@ -29,9 +29,9 @@ export const getData = () => {
 };
 
 export const getDataById = (id) => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     const response = await axios.get(
-      `https://jsonplaceholder.typicode.com/todos/?id=${id}`
+      `https://6458b9628badff578ef8e5d7.mockapi.io/api/users/${id}`
     );
     dispatch({
       type: "GET_DATA_BY_ID",
@@ -41,14 +41,25 @@ export const getDataById = (id) => {
 };
 
 export const deleteData = (ids) => {
-  console.log("id12532147263594i.", ids);
   return async (dispatch) => {
     const response = await axios.delete(
-      `https://jsonplaceholder.typicode.com/todos/id=${ids}`
+      `https://6458b9628badff578ef8e5d7.mockapi.io/api/users/${ids}`
     );
-    console.log("response", response);
     dispatch({
       type: "DELETE_DATA",
+      payload: response.data,
+    });
+  };
+};
+
+export const updateData = (id, user) => {
+  return async (dispatch) => {
+    const response = await axios.put(
+      `https://6458b9628badff578ef8e5d7.mockapi.io/api/users/${id}`,
+      user
+    );
+    dispatch({
+      type: "UPDATE_DATA",
       payload: response.data,
     });
   };
